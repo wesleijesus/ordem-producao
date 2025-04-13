@@ -19,7 +19,7 @@ sheet_id = "1UuQGybYpctVCOq5xhR_26THJOEk9jfdytLW1Be2HfRs"
 sheet_ordens = client.open_by_key(sheet_id).worksheet("Ordem_Producao_V2")
 
 # ========================
-# 2. Funcoes auxiliares
+# 2. Funcoes auxiliaresc
 # ========================
 def get_next_order_number():
     values = sheet_ordens.col_values(1)[1:]
