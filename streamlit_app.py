@@ -5,6 +5,12 @@ import json
 from io import StringIO
 from datetime import datetime
 from oauth2client.service_account import ServiceAccountCredentials
+import traceback
+
+def print_full_error(e):
+    st.error("⚠️ Ocorreu um erro:")
+    st.code("".join(traceback.format_exception(None, e, e.__traceback__)))
+
 
 # ========================
 # 1. Autenticacao com Google Sheets
@@ -16,7 +22,12 @@ client = gspread.authorize(creds)
 
 # IDs e abas
 sheet_id = "1UuQGybYpctVCOq5xhR_26THJOEk9jfdytLW1Be2HfRs"
-sheet_ordens = client.open_by_key(sheet_id).worksheet("Ordem_Producao_V2")
+
+try:
+    sheet_ordens = client.open_by_key(sheet_id).worksheet("Ordem_Producao_V2")
+except Exception as e:
+    print_full_error(e)
+    st.stop()
 
 # ========================
 # 2. Funcoes auxiliaresc
