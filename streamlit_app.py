@@ -10,7 +10,7 @@ from st_aggrid import AgGrid, GridOptionsBuilder, GridUpdateMode, JsCode
 
 
 usuarios = {
-    "Gabriel": {"senha": "Gabriel", "perfil": "Criador"},
+    "streamlit-aggrid": {"senha": "Gabriel", "perfil": "Criador"},
     "Jaqueline": {"senha": "123456", "perfil": "Validador"},
 }
 
@@ -69,10 +69,10 @@ def carregar_produtos():
         "ID Principal": "ID"
     })
 
-    st.write("🔍 Produto filtrado por SKU 'ALMCAPLIN597'")
+    """st.write("🔍 Produto filtrado por SKU 'ALMCAPLIN597'")
     sku_filtro = "ALMCAPLIN597"
     produto_filtrado = df[df["SKU"].str.strip().str.upper() == sku_filtro]
-    st.write(produto_filtrado)
+    st.write(produto_filtrado)"""
 
     #df["Custo"] = pd.to_numeric(df["Custo"], errors="coerce").fillna(0)
     return df[["SKU", "Descricao", "Custo", "ID"]]
@@ -340,7 +340,7 @@ if aba == "Criar Ordem":
         st.session_state["itens"].append(nova_linha.copy())
 
 
-
+    
     df_itens = pd.DataFrame(st.session_state["itens"])
 
 
@@ -352,17 +352,10 @@ if aba == "Criar Ordem":
         .astype(float)
         .round(2)
     )
-
     # Grid AgGrid
     gb = GridOptionsBuilder.from_dataframe(df_itens)
     gb.configure_columns(["Descricao", "Custo Unitario", "Custo Total", "Qtd Recebida", "ID"], editable=False)
     gb.configure_columns(["SKU", "Qtd Solicitada"], editable=True)
-    gb.configure_column(
-        "Custo Unitario",
-        type=["numericColumn"],
-        editable=False,
-        valueFormatter="value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })"
-    )
     gb.configure_grid_options(stopEditingWhenCellsLoseFocus=True)
     gb.configure_grid_options(enableCellChangeFlash=True)
     gb.configure_default_column(resizable=True, wrapText=True, autoHeight=True)
@@ -528,8 +521,8 @@ elif aba == "Editar Ordem":
         df_ordem = df[df['Numero'] == ordem_selecionada].copy()
 
         # Converte custo unitário para número
-        if "Custo Unitario" in df_ordem.columns:
-            df_ordem["Custo Unitario"] = df_ordem["Custo Unitario"].astype(str).str.replace(",", ".").astype(float)
+   #     if "Custo Unitario" in df_ordem.columns:
+      #      df_ordem["Custo Unitario"] = df_ordem["Custo Unitario"].astype(str).str.replace(",", ".").astype(float)
 
 
         status_atual = df_ordem["Status"].iloc[0]
