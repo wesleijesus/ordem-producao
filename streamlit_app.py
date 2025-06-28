@@ -69,11 +69,6 @@ def carregar_produtos():
         "ID Principal": "ID"
     })
 
-    """st.write("🔍 Produto filtrado por SKU 'ALMCAPLIN597'")
-    sku_filtro = "ALMCAPLIN597"
-    produto_filtrado = df[df["SKU"].str.strip().str.upper() == sku_filtro]
-    st.write(produto_filtrado)"""
-
     #df["Custo"] = pd.to_numeric(df["Custo"], errors="coerce").fillna(0)
     return df[["SKU", "Descricao", "Custo", "ID"]]
 
